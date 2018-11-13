@@ -1,17 +1,17 @@
 #!/usr/bin/env python3
-import relaylist
+#import relaylist
 import os
 import time
-import RPi.GPIO as GPIO
+#import RPi.GPIO as GPIO
 
-switch_relay = relaylist.relayswitch
+#switch_relay = relaylist.relayswitch
 
 ##  Setting up GPIO  ##
-print("Setting up GPIO...")
-pinnum = 24
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(pinnum, GPIO.OUT)
-print("Done.")
+#print("Setting up GPIO...")
+#pinnum = 24
+#GPIO.setmode(GPIO.BCM)
+#GPIO.setup(pinnum, GPIO.OUT)
+#print("Done.")
 
 is_fan_on = False
 
@@ -24,16 +24,16 @@ def checktemp():
 
 
 def main(is_fan_on, celsius = checktemp()):
-        while True:
-            celsius = checktemp()		
-                while celsius > 55:
-                    print("HOT:  " + str(celsius))
-                    GPIO.output(pinnum, GPIO.HIGH)
-                    time.sleep(0.5)
-                    GPIO.output(pinnum, GPIO.LOW)
-                    time.sleep(0.5)
-                    celsius = checktemp()
-                GPIO.output(pinnum, GPIO.LOW)
+    while True:
+            celsius = checktemp()
+            while celsius > 55:
+                print("HOT:  " + str(celsius))
+                #GPIO.output(pinnum, GPIO.HIGH)
+                time.sleep(0.5)
+                #GPIO.output(pinnum, GPIO.LOW)
+                time.sleep(0.5)
+                celsius = checktemp()
+                #GPIO.output(pinnum, GPIO.LOW)
                 if celsius >= 60:
                     switch_relay(6)
                     is_fan_on = True

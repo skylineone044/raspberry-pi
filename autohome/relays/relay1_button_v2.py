@@ -1,14 +1,17 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
+
 import RPi.GPIO as GPIO
 import os
 import pinsetup
 import datetime
+import time
 
+skiptimecheck = True
 now = datetime.datetime.now()
 path_lockstate = "/ram/relays/buttonlockstate"
 def lockcheck():
     print("checking lock position...")
-    with open("/home/pi/python/1/GPIO/buttonlockstate") as file:
+    with open("/ram/relays/buttonlockstate") as file:
         global lock
         lock = file.read()
     print("Done.")
@@ -16,9 +19,11 @@ def lockcheck():
 def timecheck():
     if lock == "0":
         print("Checking the time...")
-        if ( now.hour >= 6 ) and ( now.hour <= 19 ):
+        if ( now.hour >= 6 ) and ( now.hour <= 19 ) or (skiptimecheck == True):
             print("Allowed, Proceeding...")
-            os.system("relay1")
+            #os.system("python3 relay1.py")
+            import relaylist
+            relaylist.relayswitch(1)
             print("Relay Toggled")
         else:
             print("Cannot turn on, button pressed outside of allowed timeframe.")
@@ -39,6 +44,8 @@ while True:
         print("BUtton1 pressed!")
         lockcheck()
         timecheck()
+        print("Sleeping...")
+        time.sleep(5)
     except KeyboardInterrupt:
         print("Exiting...")
         GPIO.cleanup()
