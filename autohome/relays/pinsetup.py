@@ -10,10 +10,10 @@ def statled():
 def netstatled():
     GPIO.setup(25, GPIO.OUT)
     print("Pin 25 (netstatled) Set: OUT")
-    
+
 def hotled():
-	GPIO.setup(24, GPIO.OUT)
-	print("Pin 24 (hotled) Set: OUT")
+    GPIO.setup(24, GPIO.OUT)
+    print("Pin 24 (hotled) Set: OUT")
 
 def setup_pin1():
     GPIO.setup(26, GPIO.OUT)
