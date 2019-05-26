@@ -29,39 +29,47 @@ def relayswitch(relaynum):
     print("Creating 'path' variable...")
     path = "/ram/relays/STATES.json"
 
+    print("Cheching current state...")
+    state, data = check_current_pin_state(relaynum, path)
+
+    print("Switching relay...")
+    switch_current_pin(pin, state)
+
+    print("Writing statefile...")
+    write_new_pin_state(data, path, relaynum)
+
+    print("     --- Done ---\n\n\n")
+
+def check_current_pin_state(relaynum, path):
+    '''
+    This function checks the current state of a relay that
+    is stored in the path as a json file
+    '''
     print("Retrieving 'state' variable...")
     with open(path) as datafile_json:
         data_json = datafile_json.read()
         data = json.loads(data_json)
         state = data[relaynum]
+    return state, data
 
-    print("Switching relay...")
-    switch(pin, state)
-
-    print("Writing statefile...")
-    write(state, path)
-
-    print("     --- Done ---\n\n\n")
-
-def check(relaynum, path):
-    print("Reading current state of relay from file...")
-    with open(path) as file:
-        state = file.read()
-    print("Done.")
-    return state
-
-def write(state, path):
+def write_new_pin_state(data, path, relaynum):
+    '''
+    This function writes the new state of the relay to the json file
+    '''
     print("Writing...")
-    with open(path, "w") as file:
-        if state == "1":
-            file.write("0")
-        elif state == "0":
-            file.write("1")
-        else:
-            print("Error: 1")
+    with open(path, "w") as datafile_json:
+        if data[relaynum] == 0:
+            data[relaynum] = 1
+        elif data[relaynum] == 1:
+            data[relaynum] = 0
+        data_json = json.dumps(data)
+        datafile_json.write(data_json)
     print("Done.")
 
-def switch(pin, state):
+def switch_current_pin(pin, state):
+    '''
+    This function switches the relay
+    '''
     if state == "0":
         print("Current state: OFF, turning ON...")
         GPIO.output(pin, GPIO.LOW)
@@ -72,4 +80,4 @@ def switch(pin, state):
         GPIO.output(pin, GPIO.HIGH)
         print("Relay off")
     else:
-        print("Error: 2")
+        print("Error: Cant swtich relay")
