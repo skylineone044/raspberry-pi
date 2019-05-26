@@ -1,4 +1,8 @@
 #!/usr/bin/env python3
+'''
+This module converts and writest the default values in json format
+to PATH
+'''
 import os
 import json
 
