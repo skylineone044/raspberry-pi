@@ -35,14 +35,14 @@ def timecheck(lock_state):
     This function checks the timeframe for switching the relay
     '''
 
-    if lock_state == "0":
+    if lock_state == 0:
         print("Checking the time...")
         if (NOW.hour >= 6) and (NOW.hour <= 19) or (SKIP_TIME_CHECK == True):
             print("Allowed, Proceeding...")
             switch()
         else:
             print("Cannot turn on, button pressed outside of allowed timeframe.")
-    elif lock_state == "1":
+    elif lock_state == 1:
         print("Cannot toggle, deisabled by lock.")
 
 def switch():
