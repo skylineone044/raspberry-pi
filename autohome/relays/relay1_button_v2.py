@@ -9,6 +9,7 @@ import json
 import os
 import RPi.GPIO as GPIO
 
+GPIO.setmode(GPIO.BCM)
 PINNUM = 5
 SKIP_TIME_CHECK = True
 NOW = datetime.datetime.now()
