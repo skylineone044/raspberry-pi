@@ -29,3 +29,5 @@ for i in range(len(PINLIST)):
         print("Pin 13 (3) Set: OUT")
         GPIO.output(13, GPIO.HIGH)
         print("Pin 13 has been turned ON!")
+    if PINLIST[i] == 7:
+        GPIO.output(PINLIST[i], GPIO.HIGH)
