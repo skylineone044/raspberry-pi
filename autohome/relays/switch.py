@@ -1,7 +1,8 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
-print("\n  --- Relay 1 toggle script started! ---   ")
-import RPi.GPIO as GPIO
+print("\n  --- Relay toggle script started! ---   ")
+#import RPi.GPIO as GPIO
+import sys
 import relaylist
 
-relaylist.relayswitch(1)
+relaylist.relayswitch(sys.argv[1])
