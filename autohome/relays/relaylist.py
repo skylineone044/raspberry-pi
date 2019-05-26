@@ -1,8 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 '''
 This is the main switching module for the GPIO pins
 '''
 import RPi.GPIO as GPIO
+import json
 
 print("\n  --- Relay toggle script started! ---   ")
 
@@ -12,21 +13,34 @@ GPIO.setmode(GPIO.BCM)
 print("Done.")
 
 def relayswitch(relaynum):
-	####RELAY_instance = RELAY.check, RELAY.switch, RELAY.write
+    '''
+    This is the main switching function
+    '''
+    ####RELAY_instance = RELAY.check, RELAY.switch, RELAY.write
     print("Defining pinlist...")
     pinlist = [None, 26, 19, 13, 6, 12, 16, 20, 21]
+
     print("Creating 'pin' variable...")
     pin = pinlist[relaynum]
-    print("Setting up GPIO...")
-    GPIO.setup(pin, GPIO.OUT)
+
+    #print("Setting up GPIO...")
+    #GPIO.setup(pin, GPIO.OUT)
+
     print("Creating 'path' variable...")
-    path = "/ram/relays/r" + str(relaynum) + "stat"
+    path = "/ram/relays/STATES.json"
+
     print("Retrieving 'state' variable...")
-    state = check(relaynum, path)
+    with open(path) as datafile_json:
+        data_json = datafile_json.read()
+        data = json.loads(data_json)
+        state = data[relaynum]
+
     print("Switching relay...")
     switch(pin, state)
+
     print("Writing statefile...")
     write(state, path)
+
     print("     --- Done ---\n\n\n")
 
 def check(relaynum, path):
