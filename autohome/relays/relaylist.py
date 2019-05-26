@@ -1,4 +1,7 @@
 #!/usr/bin/python
+'''
+This is the main switching module for the GPIO pins
+'''
 import RPi.GPIO as GPIO
 
 print("\n  --- Relay toggle script started! ---   ")
@@ -19,42 +22,40 @@ def relayswitch(relaynum):
     print("Creating 'path' variable...")
     path = "/ram/relays/r" + str(relaynum) + "stat"
     print("Retrieving 'state' variable...")
-    state = RELAY.check(RELAY, relaynum, path)
+    state = check(relaynum, path)
     print("Switching relay...")
-    RELAY.switch(RELAY, pin, state)
+    switch(pin, state)
     print("Writing statefile...")
-    RELAY.write(RELAY, state, path)
+    write(state, path)
     print("     --- Done ---\n\n\n")
 
-class RELAY():
-    def check(self, relaynum, path):
-        print("Reading current state of relay from file...")
-        with open(path) as file:
-            state = file.read()
-        print("Done.")
-        return state
+def check(relaynum, path):
+    print("Reading current state of relay from file...")
+    with open(path) as file:
+        state = file.read()
+    print("Done.")
+    return state
 
-    def write(self, state, path):
-        print("Writing...")
-        with open(path, "w") as file:
-            if state == "1":
-                file.write("0")
-            elif state == "0":
-                file.write("1")
-            else:
-                print("Error: 1")
-            print("Done.")
-
-    def switch(self, pin, state):
-        if state == "0":
-            print("Current state: OFF, turning ON...")
-            GPIO.output(pin, GPIO.LOW)
-            print("Relay on")
-
-        elif state == "1":
-            print("Current state: ON, turning OFF...")
-            GPIO.output(pin, GPIO.HIGH)
-            print("Relay off")
+def write(state, path):
+    print("Writing...")
+    with open(path, "w") as file:
+        if state == "1":
+            file.write("0")
+        elif state == "0":
+            file.write("1")
         else:
-            print("Error: 2")
+            print("Error: 1")
+    print("Done.")
 
+def switch(pin, state):
+    if state == "0":
+        print("Current state: OFF, turning ON...")
+        GPIO.output(pin, GPIO.LOW)
+        print("Relay on")
+
+    elif state == "1":
+        print("Current state: ON, turning OFF...")
+        GPIO.output(pin, GPIO.HIGH)
+        print("Relay off")
+    else:
+        print("Error: 2")
