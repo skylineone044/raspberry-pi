@@ -9,4 +9,4 @@ print("\n  --- Relay toggle script started! ---   ")
 import sys
 import relaylist
 
-relaylist.relayswitch(sys.argv[1])
+relaylist.relayswitch(int(sys.argv[1]))
