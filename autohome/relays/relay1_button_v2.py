@@ -11,6 +11,7 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 PINNUM = 5
+GPIO.setup(PINNUM, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 SKIP_TIME_CHECK = True
 NOW = datetime.datetime.now()
 PATH = "/ram/relays/STATES.json"
