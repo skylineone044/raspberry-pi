@@ -1,51 +1,63 @@
 #!/usr/bin/env python3
+'''
+This module manages the button
+'''
 
-import RPi.GPIO as GPIO
-import os
-import pinsetup
-import datetime
 import time
+import datetime
+import json
+import os
+import RPi.GPIO as GPIO
 
-skiptimecheck = True
-now = datetime.datetime.now()
-path_lockstate = "/ram/relays/buttonlockstate"
+PINNUM = 5
+SKIP_TIME_CHECK = True
+NOW = datetime.datetime.now()
+PATH = "/ram/relays/STATES.json"
+SLEEP_TIME = 5
 def lockcheck():
+    '''
+    This function check wether on not the button-lock
+    is on.
+    '''
     print("checking lock position...")
-    with open("/ram/relays/buttonlockstate") as file:
-        global lock
-        lock = file.read()
+    with open(PATH) as datafile_json:
+        data_json = datafile_json.read()
+        data = json.loads(data_json)
+        state = data[0] # the 1st item in the list is
+                        #the value that stores the button-lock state
     print("Done.")
+    return state
 
-def timecheck():
-    if lock == "0":
+def timecheck(lock_state):
+    '''
+    This function checks the timeframe for switching the relay
+    '''
+
+    if lock_state == "0":
         print("Checking the time...")
-        if ( now.hour >= 6 ) and ( now.hour <= 19 ) or (skiptimecheck == True):
+        if (NOW.hour >= 6) and (NOW.hour <= 19) or (SKIP_TIME_CHECK == True):
             print("Allowed, Proceeding...")
-            #os.system("python3 relay1.py")
-            import relaylist
-            relaylist.relayswitch(1)
-            print("Relay Toggled")
+            switch()
         else:
             print("Cannot turn on, button pressed outside of allowed timeframe.")
-    elif lock == "1":
+    elif lock_state == "1":
         print("Cannot toggle, deisabled by lock.")
 
-##  Setting up GPIO  ##
-print("Setting up GPIO...")
-pinnum = 5
-pinsetup.setup_pin_B1()
-print("Done.")
+def switch():
+    '''
+    This function switches the relay corresponding to the button
+    '''
+    os.system("python3 /home/pi/cmd/switch.py 1")
 
-##  MAIN  ## 
+##  MAIN  ##
 while True:
     try:
         print("Vaiting for buttonpress...")
-        GPIO.wait_for_edge(pinnum, GPIO.RISING)
+        GPIO.wait_for_edge(PINNUM, GPIO.RISING)
         print("BUtton1 pressed!")
-        lockcheck()
-        timecheck()
+        timecheck(lockcheck())
         print("Sleeping...")
-        time.sleep(5)
+        time.sleep(SLEEP_TIME)
     except KeyboardInterrupt:
         print("Exiting...")
         GPIO.cleanup()
