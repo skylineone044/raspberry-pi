@@ -4,7 +4,7 @@ printf "--Started Autohome init script--"
 printf "--------------------------------"
 
 printf "\n-Setting up GPIO Pins..."
-python3 /home/pi/cmd/auto/pinsetup_onboot.py
+python3 /home/pi/cmd/auto/pinsetup.py
 
 printf "\n-Setting relay defaults..."
 python3 /home/pi/cmd/auto/relay_init.py
