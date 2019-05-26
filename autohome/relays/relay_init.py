@@ -10,7 +10,7 @@ PATH = "/ram/relays/"
 
 print("Making folder in /ram...")
 try:
-    os.system("mkdir {PATH}")
+    os.system("mkdir {}".format(PATH))
 except:
     print("Oops! seems you do not have the /ram directory!\n Please creathe it, and mount it in the ram")
 print("creating path...")
@@ -22,13 +22,13 @@ DEFAULT_STATES = [0, 1, 1, 0, 1, 1, 1, 1, 1]
 
 ## creating the files
 print("Creating files...")
-DATAFILE = "{PATH}STATES.json"
-os.system("touch {DATAFILE}")
-os.system("sudo chmod 777 {DATAFILE}")
+DATAFILE = "{}STATES.json".format(PATH)
+os.system("touch {}".format(DATAFILE))
+os.system("sudo chmod 777 {}".format(DATAFILE))
 
 ## Setting the values in the files
 print("Setting values...")
 DATA_JSON = json.dumps(DEFAULT_STATES)
 with open(DATAFILE, "w") as DATAFILE_JSON:
-    DATAFILE_JSON.wite(DATA_JSON)
+    DATAFILE_JSON.write(DATA_JSON)
 print("All done!")

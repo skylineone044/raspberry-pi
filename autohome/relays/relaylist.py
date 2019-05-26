@@ -70,12 +70,13 @@ def switch_current_pin(pin, state):
     '''
     This function switches the relay
     '''
-    if state == "0":
+    GPIO.setup(pin, GPIO.OUT)
+    if state == 0:
         print("Current state: OFF, turning ON...")
         GPIO.output(pin, GPIO.LOW)
         print("Relay on")
 
-    elif state == "1":
+    elif state == 1:
         print("Current state: ON, turning OFF...")
         GPIO.output(pin, GPIO.HIGH)
         print("Relay off")

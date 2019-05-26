@@ -20,7 +20,7 @@ for i in range(len(PINLIST)):
     '''
     if i < 9:
         GPIO.setup(PINLIST[i], GPIO.OUT)
-        print("Pin {PINLIST[i]} Set: OUT")
+        print("Pin {0} Set: OUT".format(PINLIST[i]))
     if PINLIST[i] == 5:
         GPIO.setup(PINLIST[i], GPIO.IN, pull_up_down=GPIO.PUD_UP)
         print("Pin 5 (9) Set: IN, Pulled UP")
