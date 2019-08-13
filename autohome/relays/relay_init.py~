@@ -17,7 +17,7 @@ print("creating path...")
 
 ## Deafults -------------
 print("Reading defaults...")
-DEFAULT_STATES = [0, 0, 1, 0, 1, 1, 1, 1, 1]
+DEFAULT_STATES = [0, 1, 1, 0, 1, 1, 1, 1, 1]
 # The 1st item is the buttonlock state, the rest are the relays
 
 ## creating the files
