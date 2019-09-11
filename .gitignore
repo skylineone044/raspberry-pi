@@ -1,6 +1,11 @@
 *.pyc
+.*.pyc
 *.directory
+.*.directory
 *.~
+.*~
 __*__ 
+*.html
+.*.html
 .*
 .*~
