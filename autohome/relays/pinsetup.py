@@ -1,60 +1,33 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
+'''
+This module initialises the pist to be
+ready to accept signal, and in the correct direction (IN / OUT)
+'''
+
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 
-def statled():
-    GPIO.setup(7, GPIO.OUT)
-    print("Pin 7 (statled) Set: OUT")
+PINLIST = [7, 26, 19, 13, 6, 12, 16, 20, 21, 5]
+# 1. item is the stat led, last item is a button
 
-def netstatled():
-    GPIO.setup(25, GPIO.OUT)
-    print("Pin 25 (netstatled) Set: OUT")
-    
-def hotled():
-	GPIO.setup(24, GPIO.OUT)
-	print("Pin 24 (hotled) Set: OUT")
+for i in range(len(PINLIST)):
+    '''
+    This loops through all the select pins in PINLIST
+    and sets their direction (IN / OUT) accodingly
 
-def setup_pin1():
-    GPIO.setup(26, GPIO.OUT)
-    print("Pin 26 (1) Set: OUT")
-
-def setup_pin2():
-    GPIO.setup(19, GPIO.OUT)
-    print("Pin 19 (2) Set: OUT")
-
-def setup_pin3():
-    GPIO.setup(13, GPIO.OUT)
-    print("Pin 13 (3) Set: OUT")
-    GPIO.output(13, GPIO.HIGH)
-    print("Pin 13 has been turned ON!")
-
-def setup_pin4():
-    GPIO.setup(6, GPIO.OUT)
-    print("Pin 6 (4) Set: OUT")
-
-def setup_pin5():
-    GPIO.setup(12, GPIO.OUT)
-    print("Pin 12 (5) Set: OUT")
-
-def setup_pin6():
-    GPIO.setup(16, GPIO.OUT)
-    print("Pin 16 (6) Set: OUT")
-    GPIO.output(16, GPIO.HIGH)
-    print("Pin 16 has been turned ON!   Note:When pin is on = relay is off")
-
-def setup_pin7():
-    GPIO.setup(20, GPIO.OUT)
-    print("Pin 20 (7) Set: OUT")
-
-def setup_pin8():
-    GPIO.setup(21, GPIO.OUT)
-    print("Pin 21 (8) Set: OUT")
-
-def setup_pin_B1():
-    GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    print("Pin 5 (9) Set: IN, Pulled UP")
-
-def setup_pin_B2():
-    GPIO.setup(8, GPIO.IN, pull_up_down=GPIO.PUD_UP)
-    print("Pin 8 (netstatled) Set: IN, Pulled UP")
+    IT also set special pins
+    '''
+    if i < 9:
+        GPIO.setup(PINLIST[i], GPIO.OUT)
+        print("Pin {0} Set: OUT".format(PINLIST[i]))
+    if PINLIST[i] == 5:
+        GPIO.setup(PINLIST[i], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        print("Pin 5 (9) Set: IN, Pulled UP")
+    if PINLIST[i] == 13:
+        GPIO.setup(13, GPIO.OUT)
+        print("Pin 13 (3) Set: OUT")
+        GPIO.output(13, GPIO.HIGH)
+        print("Pin 13 has been turned ON!")
+    if PINLIST[i] == 7:
+        GPIO.output(PINLIST[i], GPIO.HIGH)

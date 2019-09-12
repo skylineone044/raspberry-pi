@@ -1,4 +1,0 @@
-#echo Creating_internet_directory...
-mkdir /ram/internet/
-touch istherenet
-#echo Done!
