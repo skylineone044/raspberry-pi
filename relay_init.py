@@ -16,6 +16,7 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO  # Fake GPIO
     import RPi.GPIO as GPIO
 
+BOOT_CONFIG_FILE = "BootState.json"
 
 print("Starting relay setkup...")
 GPIO.setmode(GPIO.BCM)
@@ -23,7 +24,7 @@ GPIO.setmode(GPIO.BCM)
 try:
     if sys.argv[1] in ("--Write-config", "-Wc"):
         print("Writing config...")
-        with open("state.json", "w") as jsonFile:
+        with open(BOOT_CONFIG_FILE, "w") as jsonFile:
             data = {
                 "Working_dir": "wdir",
                 "pins": [5, 26, 19, 13, 6, 12, 16, 20, 21, 7],  # pin numbers
@@ -32,12 +33,12 @@ try:
             }
             # 0. item is the button, the next 8 are relay pins,
             # the last in the pins group is the status LED
-            json.dump(data, jsonFile)
+            json.dump(data, jsonFile, indent=4)
 except IndexError:
     pass
 
 print("Reading config...")
-with open("state.json", "r") as jsonFile:
+with open(BOOT_CONFIG_FILE, "r") as jsonFile:
     data = json.load(jsonFile)
     print(data)
 
