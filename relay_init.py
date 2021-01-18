@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-This module sets up the GPIO pins after startup, and sets their valuues
+This module sets up the GPIO pins after startup, and sets their values
 """
 import os
 import json
@@ -18,7 +18,7 @@ except (RuntimeError, ModuleNotFoundError):
 
 BOOT_CONFIG_FILE = "BootState.json"
 
-print("Starting relay setkup...")
+print("Starting relay setup...")
 GPIO.setmode(GPIO.BCM)
 # Set up directory srructure in the ram directory
 try:
