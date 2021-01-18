@@ -27,9 +27,18 @@ try:
         with open(BOOT_CONFIG_FILE, "w") as jsonFile:
             data = {
                 "Working_dir": "wdir",
-                "pins": [5, 26, 19, 13, 6, 12, 16, 20, 21, 7],  # pin numbers
-                "pin_directions": [0, 1, 1, 1, 1, 1, 1, 1, 1, 1],  # 0 in 1 out
-                "pin_states": [0, 0, 1, 0, 1, 1, 1, 1, 1, 1],  # 0 off 1 on
+                "pins": [
+                    {"number": 5, "direction": "IN", "state": "LOW"},
+                    {"number": 26, "direction": "OUT", "state": "LOW"},
+                    {"number": 19, "direction": "OUT", "state": "HIGH"},
+                    {"number": 13, "direction": "OUT", "state": "LOW"},
+                    {"number": 6, "direction": "OUT", "state": "HIGH"},
+                    {"number": 12, "direction": "OUT", "state": "HIGH"},
+                    {"number": 16, "direction": "OUT", "state": "HIGH"},
+                    {"number": 20, "direction": "OUT", "state": "HIGH"},
+                    {"number": 21, "direction": "OUT", "state": "HIGH"},
+                    {"number": 7, "direction": "OUT", "state": "HIGH"},
+                ],
             }
             # 0. item is the button, the next 8 are relay pins,
             # the last in the pins group is the status LED
@@ -49,18 +58,18 @@ with open(f"{data['Working_dir']}/state.json", "w") as statefile:
 
 print("Setting up pin data directions...")
 for i, pin in enumerate(data["pins"]):
-    print(f"Setting up pin {pin}... ", end="")
-    if data["pin_directions"][i] == 0:
-        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+    print(f"Setting up pin {pin['number']}... ", end="")
+    if pin["direction"] == "IN":
+        GPIO.setup(pin["number"], GPIO.IN, pull_up_down=GPIO.PUD_UP)
         print("IN PUD_UP")
-    elif data["pin_directions"][i] == 1:
-        GPIO.setup(pin, GPIO.OUT)
+    elif pin["direction"] == "OUT":
+        GPIO.setup(pin["number"], GPIO.OUT)
         print("OUT ", end="")
-        if data["pin_states"][i] == 0:
-            GPIO.output(pin, GPIO.LOW)
+        if pin["state"] == "LOW":
+            GPIO.output(pin["number"], GPIO.LOW)
             print("LOW")
-        elif data["pin_states"][i] == 1:
-            GPIO.output(pin, GPIO.HIGH)
+        elif pin["state"] == "HIGH":
+            GPIO.output(pin["number"], GPIO.HIGH)
             print("HIGH")
 
 print("Done!")
