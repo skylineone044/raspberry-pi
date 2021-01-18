@@ -1,1 +1,0 @@
-/home/pi/python/raspberry-pi/autohome/relays/relay_init.py
