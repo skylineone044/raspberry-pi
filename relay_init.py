@@ -47,5 +47,19 @@ with open(f"{data['Working_dir']}/state.json", "w") as statefile:
     json.dump(data, statefile)
 
 print("Setting up pin data directions...")
+for i, pin in enumerate(data["pins"]):
+    print(f"Setting up pin {pin}... ", end="")
+    if data["pin_directions"][i] == 0:
+        GPIO.setup(pin, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+        print("IN PUD_UP")
+    elif data["pin_directions"][i] == 1:
+        GPIO.setup(pin, GPIO.OUT)
+        print("OUT ", end="")
+        if data["pin_states"][i] == 0:
+            GPIO.output(pin, GPIO.LOW)
+            print("LOW")
+        elif data["pin_states"][i] == 1:
+            GPIO.output(pin, GPIO.HIGH)
+            print("HIGH")
 
 print("Done!")
