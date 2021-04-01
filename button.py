@@ -45,6 +45,7 @@ def isUnlocked() -> bool:
 
 
 def blinkStatusLED():
+    GPIO.setup(LED_PIN, GPIO.OUT)
     on = True
     timeout_end = time.time() + SLEEP_TIME
     while time.time() < timeout_end:
