@@ -54,6 +54,7 @@ def switch(relayPin, toState):
     ## switching it
     current_state = data["pins"][relayPin]["state"]
     if data["pins"][relayPin]["direction"] == "OUT":
+        GPIO.setup(int(relayPin), GPIO.OUT)
         if current_state == "HIGH":
             print("Switching pin {} to LOW...".format(relayPin))
             GPIO.output(int(relayPin), GPIO.LOW)
