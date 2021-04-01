@@ -27,18 +27,18 @@ try:
         with open(BOOT_CONFIG_FILE, "w") as jsonFile:
             data = {
                 "Working_dir": "wdir",
-                "pins": [
-                    {"number": 5, "direction": "IN", "state": "LOW"},
-                    {"number": 26, "direction": "OUT", "state": "LOW"},
-                    {"number": 19, "direction": "OUT", "state": "HIGH"},
-                    {"number": 13, "direction": "OUT", "state": "LOW"},
-                    {"number": 6, "direction": "OUT", "state": "HIGH"},
-                    {"number": 12, "direction": "OUT", "state": "HIGH"},
-                    {"number": 16, "direction": "OUT", "state": "HIGH"},
-                    {"number": 20, "direction": "OUT", "state": "HIGH"},
-                    {"number": 21, "direction": "OUT", "state": "HIGH"},
-                    {"number": 7, "direction": "OUT", "state": "HIGH"},
-                ],
+                "pins": {
+                    "5": {"direction": "IN", "state": "LOW"},
+                    "26": {"direction": "OUT", "state": "LOW"},
+                    "19": {"direction": "OUT", "state": "HIGH"},
+                    "13": {"direction": "OUT", "state": "LOW"},
+                    "6": {"direction": "OUT", "state": "HIGH"},
+                    "12": {"direction": "OUT", "state": "HIGH"},
+                    "16": {"direction": "OUT", "state": "HIGH"},
+                    "20": {"direction": "OUT", "state": "HIGH"},
+                    "21": {"direction": "OUT", "state": "HIGH"},
+                    "7": {"direction": "OUT", "state": "HIGH"},
+                },
             }
             # 0. item is the button, the next 8 are relay pins,
             # the last in the pins group is the status LED
@@ -49,7 +49,7 @@ except IndexError:
 print("Reading config...")
 with open(BOOT_CONFIG_FILE, "r") as jsonFile:
     data = json.load(jsonFile)
-    debugPrint(data)
+    print(data)
 
 print("Creating storage structure...")
 os.system(f"mkdir {data['Working_dir']}")
@@ -57,19 +57,21 @@ with open(f"{data['Working_dir']}/state.json", "w") as statefile:
     json.dump(data, statefile)
 
 print("Setting up pin data directions...")
-for i, pin in enumerate(data["pins"]):
-    print(f"Setting up pin {pin['number']}... ", end="")
-    if pin["direction"] == "IN":
-        GPIO.setup(pin["number"], GPIO.IN, pull_up_down=GPIO.PUD_UP)
+for pin, pindata in data["pins"].items():
+    print(f"Setting up pin {pin}... ", end="")
+
+    if pindata["direction"] == "IN":
+        GPIO.setup(int(pin), GPIO.IN, pull_up_down=GPIO.PUD_UP)
         print("IN PUD_UP")
-    elif pin["direction"] == "OUT":
-        GPIO.setup(pin["number"], GPIO.OUT)
+    elif pindata["direction"] == "OUT":
+
+        GPIO.setup(int(pin), GPIO.OUT)
         print("OUT ", end="")
-        if pin["state"] == "LOW":
-            GPIO.output(pin["number"], GPIO.LOW)
+        if pindata["state"] == "LOW":
+            GPIO.output(int(pin), GPIO.LOW)
             print("LOW")
-        elif pin["state"] == "HIGH":
-            GPIO.output(pin["number"], GPIO.HIGH)
+        elif pindata["state"] == "HIGH":
+            GPIO.output(int(pin), GPIO.HIGH)
             print("HIGH")
 
 print("Done!")

@@ -1,55 +1,45 @@
 {
     "Working_dir": "wdir",
-    "pins": [
-        {
-            "number": 5,
+    "pins": {
+        "5": {
             "direction": "IN",
             "state": "LOW"
         },
-        {
-            "number": 26,
+        "26": {
             "direction": "OUT",
             "state": "LOW"
         },
-        {
-            "number": 19,
+        "19": {
             "direction": "OUT",
             "state": "HIGH"
         },
-        {
-            "number": 13,
+        "13": {
             "direction": "OUT",
             "state": "LOW"
         },
-        {
-            "number": 6,
+        "6": {
             "direction": "OUT",
             "state": "HIGH"
         },
-        {
-            "number": 12,
+        "12": {
             "direction": "OUT",
             "state": "HIGH"
         },
-        {
-            "number": 16,
+        "16": {
             "direction": "OUT",
             "state": "HIGH"
         },
-        {
-            "number": 20,
+        "20": {
             "direction": "OUT",
             "state": "HIGH"
         },
-        {
-            "number": 21,
+        "21": {
             "direction": "OUT",
             "state": "HIGH"
         },
-        {
-            "number": 7,
+        "7": {
             "direction": "OUT",
             "state": "HIGH"
         }
-    ]
+    }
 }
