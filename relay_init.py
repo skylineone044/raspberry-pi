@@ -49,7 +49,7 @@ except IndexError:
 print("Reading config...")
 with open(BOOT_CONFIG_FILE, "r") as jsonFile:
     data = json.load(jsonFile)
-    print(data)
+    debugPrint(data)
 
 print("Creating storage structure...")
 os.system(f"mkdir {data['Working_dir']}")
