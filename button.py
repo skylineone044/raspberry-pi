@@ -18,7 +18,7 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO  # Fake GPIO
     import RPi.GPIO as GPIO
 
-import switch
+# import switch
 
 
 SLEEP_TIME = 5
@@ -62,5 +62,6 @@ while True:
     GPIO.wait_for_edge(BUTTON_PIN, GPIO.RISING)
     print("Button pressed!")
     if isUnlocked():
-        switch.switch("26", "SWITCH")
+        # switch.switch("26", "SWITCH")
+        os.system("/home/pi/cmd/switch.py 26")
     blinkStatusLED()
