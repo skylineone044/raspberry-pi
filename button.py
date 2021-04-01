@@ -57,10 +57,19 @@ def blinkStatusLED():
     GPIO.output(LED_PIN, GPIO.HIGH)
 
 
-while True:
-    print("Waiting for buttonpress...")
-    GPIO.wait_for_edge(BUTTON_PIN, GPIO.RISING)
-    print("Button pressed!")
-    if isUnlocked():
-        switch.switch("26", "SWITCH")
-    blinkStatusLED()
+try:
+    while True:
+        print("Waiting for buttonpress...")
+        GPIO.wait_for_edge(BUTTON_PIN, GPIO.RISING)
+        print("Button pressed!")
+        if isUnlocked():
+            switch.switch("26", "SWITCH")
+        blinkStatusLED()
+except KeyboardInterrupt:  # if ctrl+c pressed exit cleanly
+    GPIO.cleanup()
+
+except:  # this catches ALL other exceptions including errors.
+    GPIO.cleanup()
+
+finally:  # cleanup GPIO on normal exit
+    GPIO.cleanup()
