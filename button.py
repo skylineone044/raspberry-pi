@@ -24,9 +24,12 @@ import switch
 SLEEP_TIME = 5
 BLINK_TIME = 0.3
 TIME_CHECK = False
+
 BUTTON_PIN = 5
+LED_PIN = 7
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(LED_PIN, GPIO.OUT)
 
 
 def isUnlocked() -> bool:
