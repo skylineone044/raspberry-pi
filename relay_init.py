@@ -52,13 +52,13 @@ with open(BOOT_CONFIG_FILE, "r") as jsonFile:
     print(data)
 
 print("Creating storage structure...")
-os.system(f"mkdir {data['Working_dir']}")
-with open(f"{data['Working_dir']}/state.json", "w") as statefile:
+os.system("mkdir {}".format(data['Working_dir']))
+with open("{}/state.json".format(data['Working_dir']), "w") as statefile:
     json.dump(data, statefile)
 
 print("Setting up pin data directions...")
 for pin, pindata in data["pins"].items():
-    print(f"Setting up pin {pin}... ", end="")
+    print("Setting up pin {}... ".format(pin), end="")
 
     if pindata["direction"] == "IN":
         GPIO.setup(int(pin), GPIO.IN, pull_up_down=GPIO.PUD_UP)

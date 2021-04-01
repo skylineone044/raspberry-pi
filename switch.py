@@ -43,7 +43,7 @@ def switch(relayPin, toState):
             exit(0)
     except KeyError:
         print(
-            f"This relay pin number [{relayPin}] is not configured to be switched!"
+            "This relay pin number [{}] is not configured to be switched!".format(relayPin)
         )
         exit(3)
 
@@ -53,11 +53,11 @@ def switch(relayPin, toState):
     current_state = data["pins"][relayPin]["state"]
     if data["pins"][relayPin]["direction"] == "OUT":
         if current_state == "HIGH":
-            print(f"Switching pin {relayPin} to LOW...")
+            print("Switching pin {} to LOW...".format(relayPin))
             GPIO.output(int(relayPin), GPIO.LOW)
             data["pins"][relayPin]["state"] = "LOW"
         elif current_state == "LOW":
-            print(f"Switching pin {relayPin} to HIGH...")
+            print("Switching pin {} to HIGH...".format(relayPin))
             GPIO.output(int(relayPin), GPIO.HIGH)
             data["pins"][relayPin]["state"] = "HIGH"
     else:
