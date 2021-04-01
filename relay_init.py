@@ -7,7 +7,7 @@ import json
 import sys
 
 try:
-    import RPi.GPIO
+    import RPi.GPIO as GPIO
 except (RuntimeError, ModuleNotFoundError):
     print("USING DUMMY GPIO LIB")
     import fake_rpi
