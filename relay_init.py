@@ -16,6 +16,9 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO  # Fake GPIO
     import RPi.GPIO as GPIO
 
+from tendo import singleton
+me = singleton.SingleInstance() # will sys.exit(-1) if other instance is running
+
 BOOT_CONFIG_FILE = "BootState.json"
 
 print("Starting relay setup...")
