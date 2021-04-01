@@ -21,6 +21,7 @@ except (RuntimeError, ModuleNotFoundError):
 import switch
 
 
+GPIO.setmode(GPIO.BCM)
 SLEEP_TIME = 5
 BLINK_TIME = 0.3
 TIME_CHECK = False
