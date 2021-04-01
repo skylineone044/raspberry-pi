@@ -1,1 +1,45 @@
-{"Working_dir": "wdir", "pins": {"5": {"direction": "IN", "state": "LOW"}, "26": {"direction": "OUT", "state": "LOW"}, "19": {"direction": "OUT", "state": "HIGH"}, "13": {"direction": "OUT", "state": "LOW"}, "6": {"direction": "OUT", "state": "HIGH"}, "12": {"direction": "OUT", "state": "HIGH"}, "16": {"direction": "OUT", "state": "HIGH"}, "20": {"direction": "OUT", "state": "HIGH"}, "21": {"direction": "OUT", "state": "HIGH"}, "7": {"direction": "OUT", "state": "HIGH"}}}
+{
+    "Working_dir": "wdir",
+    "pins": {
+        "5": {
+            "direction": "IN",
+            "state": "HIGH"
+        },
+        "26": {
+            "direction": "OUT",
+            "state": "HIGH"
+        },
+        "19": {
+            "direction": "OUT",
+            "state": "HIGH"
+        },
+        "13": {
+            "direction": "OUT",
+            "state": "LOW"
+        },
+        "6": {
+            "direction": "OUT",
+            "state": "HIGH"
+        },
+        "12": {
+            "direction": "OUT",
+            "state": "HIGH"
+        },
+        "16": {
+            "direction": "OUT",
+            "state": "HIGH"
+        },
+        "20": {
+            "direction": "OUT",
+            "state": "HIGH"
+        },
+        "21": {
+            "direction": "OUT",
+            "state": "HIGH"
+        },
+        "7": {
+            "direction": "OUT",
+            "state": "HIGH"
+        }
+    }
+}
