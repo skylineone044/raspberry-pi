@@ -22,7 +22,7 @@ import switch
 
 
 SLEEP_TIME = 5
-BLINK_TIME = 0.3
+BLINK_TIME = 0.1
 TIME_CHECK = False
 
 BUTTON_PIN = 5
@@ -54,6 +54,7 @@ def blinkStatusLED():
             GPIO.output(LED_PIN, GPIO.HIGH)
         on = not on
         time.sleep(BLINK_TIME)
+    GPIO.output(LED_PIN, GPIO.HIGH)
 
 
 while True:
