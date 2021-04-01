@@ -22,7 +22,7 @@ import switch
 
 
 SLEEP_TIME = 5
-BLINK_TIME = 0.1
+BLINK_TIME = 0.2
 TIME_CHECK = False
 
 BUTTON_PIN = 5
