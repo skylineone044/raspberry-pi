@@ -17,6 +17,8 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO  # Fake GPIO
     import RPi.GPIO as GPIO
 
+
+GPIO.setmode(GPIO.BCM)
 WORKING_STATUS_FILE = "wdir/state.json"
 
 
