@@ -21,11 +21,12 @@ except (RuntimeError, ModuleNotFoundError):
 import switch
 
 
-GPIO.setmode(GPIO.BCM)
 SLEEP_TIME = 5
 BLINK_TIME = 0.3
 TIME_CHECK = False
 BUTTON_PIN = 5
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 
 def isUnlocked() -> bool:
