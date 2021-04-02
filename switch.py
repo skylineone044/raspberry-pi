@@ -81,7 +81,7 @@ def switch(relayPin, toState):
         print("Writing out state...")
         json.dump(data, stateFile, indent=4)
 
-    # time.sleep(2)
+    time.sleep(0.2)
     print("Done")
     os.remove(LOCKFILE)
 
