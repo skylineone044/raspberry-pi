@@ -20,6 +20,8 @@ except (RuntimeError, ModuleNotFoundError):
 
 
 GPIO.setmode(GPIO.BCM)
+# The realys pin numbers in order, for relay 1 is the [0] indexed item
+PIN_LIST = ["26", "19", "13", "6", "12", "16", "20", "21"]
 WORKING_STATUS_FILE = "wdir/state.json"
 LOCKFILE = "wdir/LOCK"
 
@@ -86,12 +88,35 @@ def switch(relayPin, toState):
     os.remove(LOCKFILE)
 
 
+def relayLookup(relayPin: str) -> str:
+    """
+    picks the right realy number
+    if the input number is bare, it returns it,
+    as it is the default GPIO numbering mode
+
+    if the first character of the relayPin is an "R", then we are int the
+    realtive realy numbering mode, in this case relay numbers have to be between
+    1-8, as that is how many relays are connected to the pi. based on the number,
+    we pick the correct GPIO pin number from the PIN_LIST
+    """
+    if relayPin[0] in ("R", "r"):
+        try:
+            return PIN_LIST[int(relayPin[1])-1]
+        except IndexError:
+            print("no such relay configured")
+            exit(5)
+    else:
+        return relayPin
+
+
 if __name__ == "__main__":
     try:
         relayPin = sys.argv[1]
     except IndexError:
         print("No relay number given, abording...")
         exit(1)
+
+    relayPin = relayLookup(relayPin)
 
     try:
         toState = sys.argv[2]
