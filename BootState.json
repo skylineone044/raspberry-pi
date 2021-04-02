@@ -7,7 +7,7 @@
         },
         "26": {
             "direction": "OUT",
-            "state": "LOW"
+            "state": "HIGH"
         },
         "19": {
             "direction": "OUT",
