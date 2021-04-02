@@ -4,8 +4,12 @@
 .*.directory
 *.~
 .*~
-__*__ 
+__*__
 *.html
 .*.html
 .*
 .*~
+wdir*
+wdir/*
+wdir
+*wdir*
