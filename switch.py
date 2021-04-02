@@ -6,6 +6,7 @@ This file does thwe main switchong action
 import os
 import json
 import sys
+import time
 
 try:
     import RPi.GPIO as GPIO
@@ -20,9 +21,16 @@ except (RuntimeError, ModuleNotFoundError):
 
 GPIO.setmode(GPIO.BCM)
 WORKING_STATUS_FILE = "wdir/state.json"
+LOCKFILE = "wdir/LOCK"
 
 
 def switch(relayPin, toState):
+    if os.path.isfile(LOCKFILE):
+        print("locked, cannot switch")
+        return -1
+    open(LOCKFILE, 'a').close()
+
+
     toState = toState.upper()
     if toState not in ("SWITCH", "HIGH", "LOW", "ON", "OFF"):
         print("Invalid desired state given, aborting...")
@@ -73,7 +81,9 @@ def switch(relayPin, toState):
         print("Writing out state...")
         json.dump(data, stateFile, indent=4)
 
+    # time.sleep(2)
     print("Done")
+    os.remove(LOCKFILE)
 
 
 if __name__ == "__main__":
