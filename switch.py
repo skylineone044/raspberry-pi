@@ -88,7 +88,7 @@ def switch(relayPin, toState):
     os.remove(LOCKFILE)
 
 
-def relayLookup(relayPin: str) -> str:
+def relayLookup(relayPin):
     """
     picks the right realy number
     if the input number is bare, it returns it,
