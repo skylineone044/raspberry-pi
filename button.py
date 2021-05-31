@@ -58,15 +58,35 @@ def blinkStatusLED():
     GPIO.output(LED_PIN, GPIO.HIGH)
 
 
+def wait_for_long_press():
+    while True:
+        print("Wainting...")
+        GPIO.wait_for_edge(BUTTON_PIN, GPIO.FALLING)
+        print("Pressed")
+        start = time.time()
+        # time.sleep(0.05)
+
+        while GPIO.input(BUTTON_PIN) == GPIO.LOW:
+            time.sleep(0.01)
+            length = time.time() - start
+            print(length)
+
+            if length > 1:
+                print("Long Press")
+                return True
+            else:
+                print("Short Press")
+
+
 try:
     while True:
         print("Waiting for buttonpress...")
-        GPIO.wait_for_edge(BUTTON_PIN, GPIO.RISING)
-        print("Button pressed!")
-        if isUnlocked():
+        if wait_for_long_press() and isUnlocked():
+            print("Button pressed!")
             if switch.switch("26", "SWITCH") == -1:
                 time.sleep(2)
         blinkStatusLED()
+
 except KeyboardInterrupt:  # if ctrl+c pressed exit cleanly
     GPIO.cleanup()
 finally:  # cleanup GPIO on normal exit
