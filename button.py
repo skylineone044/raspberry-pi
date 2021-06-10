@@ -26,6 +26,8 @@ SLEEP_TIME = 5
 BLINK_TIME = 0.2
 TIME_CHECK = False
 
+LONG_PRESS_TIME_SECONDS = 0.3
+
 BUTTON_PIN = 5
 LED_PIN = 7
 GPIO.setmode(GPIO.BCM)
@@ -71,7 +73,7 @@ def wait_for_long_press():
             length = time.time() - start
             print(length)
 
-            if length > 1:
+            if length > LONG_PRESS_TIME_SECONDS:
                 print("Long Press")
                 return True
             else:
