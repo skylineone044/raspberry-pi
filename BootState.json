@@ -27,15 +27,15 @@
         },
         "16": {
             "direction": "OUT",
-            "state": "HIGH"
+            "state": "LOW"
         },
         "20": {
             "direction": "OUT",
-            "state": "HIGH"
+            "state": "LOW"
         },
         "21": {
             "direction": "OUT",
-            "state": "HIGH"
+            "state": "LOW"
         },
         "7": {
             "direction": "OUT",
