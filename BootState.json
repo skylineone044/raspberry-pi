@@ -7,23 +7,23 @@
         },
         "26": {
             "direction": "OUT",
-            "state": "LOW"
+            "state": "HIGH"
         },
         "19": {
             "direction": "OUT",
-            "state": "HIGH"
+            "state": "LOW"
         },
         "13": {
             "direction": "OUT",
-            "state": "LOW"
+            "state": "HIGH"
         },
         "6": {
             "direction": "OUT",
-            "state": "HIGH"
+            "state": "LOW"
         },
         "12": {
             "direction": "OUT",
-            "state": "HIGH"
+            "state": "LOW"
         },
         "16": {
             "direction": "OUT",
