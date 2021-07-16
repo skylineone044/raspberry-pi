@@ -9,4 +9,7 @@ __*__
 .*.html
 .*
 .*~
+wdir*
+wdir/*
 wdir
+*wdir*
