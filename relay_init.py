@@ -27,7 +27,7 @@ try:
         print("Writing config...")
         with open(BOOT_CONFIG_FILE, "w") as jsonFile:
             data = {
-                "Working_dir": "wdir",
+                "Working_dir": os.path.dirname(os.path.abspath(__file__)) + "/wdir",
                 "pins": {
                     "5": {"direction": "IN", "state": "LOW"},
                     "26": {"direction": "OUT", "state": "LOW"},
