@@ -17,7 +17,7 @@ except (RuntimeError, ModuleNotFoundError):
     import RPi.GPIO as GPIO
 
 
-CMD_PATH = os.path.dirname(os.path.abspath(__file__))
+CMD_PATH = os.path.dirname(os.path.abspath(__file__)) + "/"
 BOOT_CONFIG_FILE = CMD_PATH + "/BootState.json"
 
 print("Starting relay setup...")
