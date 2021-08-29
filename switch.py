@@ -23,7 +23,7 @@ except (RuntimeError, ModuleNotFoundError):
 GPIO.setmode(GPIO.BCM)
 # The realys pin numbers in order, for relay 1 is the [0] indexed item
 PIN_LIST = ["26", "19", "13", "6", "12", "16", "20", "21"]
-WORKING_DIRECTORY = str(pathlib.Path().resolve()) + "/wdir"
+WORKING_DIRECTORY = os.path.dirname(os.path.abspath(__file__)) + "/wdir"
 WORKING_STATUS_FILE = WORKING_DIRECTORY + "/state.json"
 LOCKFILE = WORKING_DIRECTORY + "/LOCK"
 
