@@ -7,6 +7,7 @@ import os
 import json
 import sys
 import time
+import pathlib
 
 try:
     import RPi.GPIO as GPIO
@@ -22,8 +23,9 @@ except (RuntimeError, ModuleNotFoundError):
 GPIO.setmode(GPIO.BCM)
 # The realys pin numbers in order, for relay 1 is the [0] indexed item
 PIN_LIST = ["26", "19", "13", "6", "12", "16", "20", "21"]
-WORKING_STATUS_FILE = "wdir/state.json"
-LOCKFILE = "wdir/LOCK"
+WORKING_DIRECTORY = str(pathlib.Path().resolve()) + "/wdir"
+WORKING_STATUS_FILE = WORKING_DIRECTORY + "/state.json"
+LOCKFILE = WORKING_DIRECTORY + "/LOCK"
 
 
 def switch(relayPin, toState):
