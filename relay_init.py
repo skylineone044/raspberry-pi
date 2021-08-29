@@ -17,7 +17,8 @@ except (RuntimeError, ModuleNotFoundError):
     import RPi.GPIO as GPIO
 
 
-BOOT_CONFIG_FILE = os.path.dirname(os.path.abspath(__file__)) + "/BootState.json"
+CMD_PATH = os.path.dirname(os.path.abspath(__file__))
+BOOT_CONFIG_FILE = CMD_PATH + "/BootState.json"
 
 print("Starting relay setup...")
 GPIO.setmode(GPIO.BCM)
@@ -27,7 +28,7 @@ try:
         print("Writing config...")
         with open(BOOT_CONFIG_FILE, "w") as jsonFile:
             data = {
-                "Working_dir": os.path.dirname(os.path.abspath(__file__)) + "/wdir",
+                "Working_dir": "wdir",
                 "pins": {
                     "5": {"direction": "IN", "state": "LOW"},
                     "26": {"direction": "OUT", "state": "LOW"},
@@ -53,8 +54,8 @@ with open(BOOT_CONFIG_FILE, "r") as jsonFile:
     print(data)
 
 print("Creating storage structure...")
-os.system("mkdir {}".format(data['Working_dir']))
-with open("{}/state.json".format(data['Working_dir']), "w") as statefile:
+os.system("mkdir {}".format(CMD_PATH + data['Working_dir']))
+with open("{}/state.json".format(CMD_PATH + data['Working_dir']), "w") as statefile:
     json.dump(data, statefile)
 
 print("Setting up pin data directions...")
