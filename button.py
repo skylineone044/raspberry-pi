@@ -19,6 +19,7 @@ except (RuntimeError, ModuleNotFoundError):
     import RPi.GPIO as GPIO
 
 
+import relay_init
 import switch
 
 
