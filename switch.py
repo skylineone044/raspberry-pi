@@ -28,12 +28,15 @@ WORKING_STATUS_FILE = WORKING_DIRECTORY + "/state.json"
 LOCKFILE = WORKING_DIRECTORY + "/LOCK"
 
 
+def unlock():
+    os.remove(LOCKFILE)
+
+
 def switch(relayPin, toState):
     if os.path.isfile(LOCKFILE):
         print("locked, cannot switch")
         return -1
     open(LOCKFILE, 'a').close()
-
 
     toState = toState.upper()
     if toState not in ("SWITCH", "HIGH", "LOW", "ON", "OFF"):
@@ -63,7 +66,7 @@ def switch(relayPin, toState):
 
     # if we got this far they we need to switch the realy
 
-    ## switching it
+    # switching it
     current_state = data["pins"][relayPin]["state"]
     if data["pins"][relayPin]["direction"] == "OUT":
         GPIO.setup(int(relayPin), GPIO.OUT)
@@ -79,7 +82,7 @@ def switch(relayPin, toState):
         print("This pin is configured as an input!")
         exit(4)
 
-    ## writing out changed data
+    # writing out changed data
 
     with open(WORKING_STATUS_FILE, "w") as stateFile:
         print("Writing out state...")
@@ -87,7 +90,6 @@ def switch(relayPin, toState):
 
     time.sleep(0.2)
     print("Done")
-    os.remove(LOCKFILE)
 
 
 def relayLookup(relayPin):
@@ -126,4 +128,7 @@ if __name__ == "__main__":
         print("No desired state given, defaulting to switching")
         toState = "SWITCH"
 
-    switch(relayPin, toState)
+    try:
+        switch(relayPin, toState)
+    finally:
+        unlock()
