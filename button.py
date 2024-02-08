@@ -2,11 +2,8 @@
 """
 This module handles the button, for manual control
 """
-import os
-import json
 import sys
 import time
-import datetime
 
 try:
     import RPi.GPIO as GPIO
@@ -18,10 +15,7 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO  # Fake GPIO
     import RPi.GPIO as GPIO
 
-
-import relay_init
-import switch
-
+import switcher_service
 
 SLEEP_TIME = 5
 BLINK_TIME = 0.2
@@ -34,19 +28,6 @@ LED_PIN = 7
 GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(LED_PIN, GPIO.OUT)
-
-
-def isUnlocked() -> bool:
-    if TIME_CHECK:
-        if (datetime.datetime.now().hour >= 7) and (
-            datetime.datetime.now().hour <= 22
-        ):
-            return True
-        else:
-            return False
-    else:
-        return True
-
 
 def blinkStatusLED():
     on = True
@@ -84,10 +65,9 @@ def wait_for_long_press():
 try:
     while True:
         print("Waiting for buttonpress...")
-        if wait_for_long_press() and isUnlocked():
+        if wait_for_long_press():
             print("Button pressed!")
-            if switch.switch("26", "SWITCH") == -1:
-                time.sleep(2)
+            switcher_service.switch({"relay1": "toggle"})
         blinkStatusLED()
 
 except KeyboardInterrupt:  # if ctrl+c pressed exit cleanly
