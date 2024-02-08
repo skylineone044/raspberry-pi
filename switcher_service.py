@@ -33,7 +33,7 @@ PINS = {
 }
 
 HOSTNAME = "localhost"
-PORT = 8080
+PORT = 8091
 
 
 def init_realys():
