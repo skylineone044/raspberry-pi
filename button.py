@@ -29,6 +29,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(BUTTON_PIN, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(LED_PIN, GPIO.OUT)
 
+
 def blinkStatusLED():
     on = True
     timeout_end = time.time() + SLEEP_TIME

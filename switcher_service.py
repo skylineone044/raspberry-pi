@@ -109,9 +109,9 @@ class Server(BaseHTTPRequestHandler):
             )
 
 
-if __name__ == "__main__":
-    init_realys()
+init_realys()
 
+if __name__ == "__main__":
     webServer = HTTPServer((HOSTNAME, PORT), Server)
     print(f"Server started http://{HOSTNAME}:{PORT}")
 
