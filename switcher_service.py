@@ -73,9 +73,9 @@ def switch(new_states):
             if action == "toggle":
                 new_state = GPIO.HIGH if PINS[relay]["state"] == "LOW" else GPIO.LOW
             elif action in ["on", "high"]:
-                new_state = GPIO.HIGH
-            elif action in ["off", "low"]:
                 new_state = GPIO.LOW
+            elif action in ["off", "low"]:
+                new_state = GPIO.HIGH
             else:
                 print(f"Unknown action: {action}")
                 continue
