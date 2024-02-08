@@ -74,7 +74,7 @@ try:
             response = urllib.request.urlopen(
                 "http://192.168.31.120:8091?relay1=toggle"
             ).read()
-            print(response)
+            print(response.decode())
 
         blinkStatusLED()
 
