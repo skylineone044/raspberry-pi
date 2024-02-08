@@ -4,6 +4,7 @@ This module handles the button, for manual control
 """
 import sys
 import time
+import urllib.request
 
 time.sleep(5)
 
@@ -70,7 +71,11 @@ try:
         print("Waiting for buttonpress...")
         if wait_for_long_press():
             print("Button pressed!")
-            switcher_service.switch({"relay1": "toggle"})
+            response = urllib.request.urlopen(
+                "http://192.168.31.120:8091?relay1=toggle"
+            ).read()
+            print(response)
+
         blinkStatusLED()
 
 except KeyboardInterrupt:  # if ctrl+c pressed exit cleanly
