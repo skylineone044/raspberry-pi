@@ -5,6 +5,8 @@ This module handles the button, for manual control
 import sys
 import time
 
+time.sleep(5)
+
 try:
     import RPi.GPIO as GPIO
 except (RuntimeError, ModuleNotFoundError):
