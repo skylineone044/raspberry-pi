@@ -27,7 +27,7 @@ PINS = {
     "relay4": {"pin_number": 13, "direction": "OUT", "state": "HIGH"},
     "relay5": {"pin_number": 12, "direction": "OUT", "state": "LOW"},
     "relay6": {"pin_number": 16, "direction": "OUT", "state": "LOW"},
-    "relay7": {"pin_number": 20, "direction": "OUT", "state": "LOW"},
+    "relay7": {"pin_number": 20, "direction": "OUT", "state": "HIGH"},
     "relay8": {"pin_number": 21, "direction": "OUT", "state": "LOW"},
     "satus_led": {"pin_number": 7, "direction": "OUT", "state": "HIGH"},
 }
@@ -103,7 +103,7 @@ class Server(BaseHTTPRequestHandler):
         for relay in mutated_relays:
             self.wfile.write(
                 bytes(
-                    f"{relay}\t{'on' if PINS[relay]['state'] == 'HIGH' else 'off'}\n",
+                    f"{relay}\t{'on' if PINS[relay]['state'] == 'LOW' else 'off'}\n",
                     "utf-8",
                 )
             )
