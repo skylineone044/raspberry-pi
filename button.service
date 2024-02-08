@@ -6,6 +6,8 @@ After=network-online.target
 
 [Service]
 Type=simple
+User=1000
+Group=1000
 StandardInput=null
 StandardOutput=file:/var/log/button.log
 StandardError=inherit
