@@ -26,7 +26,7 @@ PINS = {
     "relay3": {"pin_number": 6, "direction": "OUT", "state": "LOW"},
     "relay4": {"pin_number": 13, "direction": "OUT", "state": "HIGH"},
     "relay5": {"pin_number": 12, "direction": "OUT", "state": "LOW"},
-    "relay6": {"pin_number": 16, "direction": "OUT", "state": "LOW"},
+    "relay6": {"pin_number": 16, "direction": "OUT", "state": "HIGH"},
     "relay7": {"pin_number": 20, "direction": "OUT", "state": "HIGH"},
     "relay8": {"pin_number": 21, "direction": "OUT", "state": "LOW"},
     "satus_led": {"pin_number": 7, "direction": "OUT", "state": "HIGH"},
