@@ -81,7 +81,7 @@ def switch(new_states):
                 continue
             GPIO.output(PINS[relay]["pin_number"], new_state)
             PINS[relay]["state"] = "HIGH" if new_state == GPIO.HIGH else "LOW"
-            print(f"{relay}\t{'on' if PINS[relay]['state'] == 'LOW' else 'off'}\n",)
+            print(f"{relay}\t{'on' if PINS[relay]['state'] == 'LOW' else 'off'}",)
             mutated_relays.append(relay)
         except KeyError:
             print(f"Relay not found: {relay}")
