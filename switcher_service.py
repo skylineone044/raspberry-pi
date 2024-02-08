@@ -32,7 +32,7 @@ PINS = {
     "satus_led": {"pin_number": 7, "direction": "OUT", "state": "HIGH"},
 }
 
-HOSTNAME = "localhost"
+HOSTNAME = "192.168.31.120"
 PORT = 8091
 
 
