@@ -6,7 +6,7 @@ import sys
 import time
 import urllib.request
 
-time.sleep(2)
+time.sleep(4)
 
 try:
     import RPi.GPIO as GPIO

@@ -6,6 +6,9 @@ Runs a webserver that listens to switch commands, and switcher the relays
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 import sys
+import time
+
+time.sleep(2)
 
 try:
     import RPi.GPIO as GPIO
