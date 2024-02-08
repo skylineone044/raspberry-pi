@@ -6,9 +6,6 @@ Runs a webserver that listens to switch commands, and switcher the relays
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 import sys
-import time
-
-time.sleep(5)
 
 try:
     import RPi.GPIO as GPIO
@@ -84,7 +81,9 @@ def switch(new_states):
                 continue
             GPIO.output(PINS[relay]["pin_number"], new_state)
             PINS[relay]["state"] = "HIGH" if new_state == GPIO.HIGH else "LOW"
-            print(f"{relay}\t{'on' if PINS[relay]['state'] == 'LOW' else 'off'}",)
+            print(
+                f"{relay}\t{'on' if PINS[relay]['state'] == 'LOW' else 'off'}",
+            )
             mutated_relays.append(relay)
         except KeyError:
             print(f"Relay not found: {relay}")
@@ -111,7 +110,6 @@ class Server(BaseHTTPRequestHandler):
                     "utf-8",
                 )
             )
-
 
 
 if __name__ == "__main__":

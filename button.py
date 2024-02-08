@@ -18,8 +18,6 @@ except (RuntimeError, ModuleNotFoundError):
     sys.modules["RPi.GPIO"] = fake_rpi.RPi.GPIO  # Fake GPIO
     import RPi.GPIO as GPIO
 
-import switcher_service
-
 SLEEP_TIME = 5
 BLINK_TIME = 0.2
 TIME_CHECK = False
@@ -79,6 +77,6 @@ try:
         blinkStatusLED()
 
 except KeyboardInterrupt:  # if ctrl+c pressed exit cleanly
-    GPIO.cleanup()
+    pass
 finally:  # cleanup GPIO on normal exit
     GPIO.cleanup()
