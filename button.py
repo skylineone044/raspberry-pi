@@ -6,8 +6,6 @@ import sys
 import time
 import urllib.request
 
-time.sleep(2)
-
 try:
     import RPi.GPIO as GPIO
 except (RuntimeError, ModuleNotFoundError):

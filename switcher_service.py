@@ -6,6 +6,7 @@ Runs a webserver that listens to switch commands, and switcher the relays
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from urllib.parse import urlparse
 import sys
+import time
 
 try:
     import RPi.GPIO as GPIO
@@ -115,7 +116,15 @@ class Server(BaseHTTPRequestHandler):
 if __name__ == "__main__":
     init_realys()
 
-    webServer = HTTPServer((HOSTNAME, PORT), Server)
+    while True:
+        try:
+            webServer = HTTPServer((HOSTNAME, PORT), Server)
+            break
+        except OSError as os_error:
+            print(os_error)
+            time.sleep(1)
+            continue
+
     print(f"Server started http://{HOSTNAME}:{PORT}")
 
     try:
