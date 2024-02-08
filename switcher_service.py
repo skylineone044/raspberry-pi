@@ -25,10 +25,10 @@ PINS = {
     "realy2": {"pin_number": 19, "direction": "OUT", "state": "LOW"},
     "relay3": {"pin_number": 6, "direction": "OUT", "state": "LOW"},
     "relay4": {"pin_number": 13, "direction": "OUT", "state": "HIGH"},
-    "relay5": {"pin_number": 12, "direction": "OUT", "state": "LOW"},
+    "relay5": {"pin_number": 12, "direction": "OUT", "state": "HIGH"},
     "relay6": {"pin_number": 16, "direction": "OUT", "state": "HIGH"},
     "relay7": {"pin_number": 20, "direction": "OUT", "state": "HIGH"},
-    "relay8": {"pin_number": 21, "direction": "OUT", "state": "LOW"},
+    "relay8": {"pin_number": 21, "direction": "OUT", "state": "HIGH"},
     "satus_led": {"pin_number": 7, "direction": "OUT", "state": "HIGH"},
 }
 
@@ -81,6 +81,7 @@ def switch(new_states):
                 continue
             GPIO.output(PINS[relay]["pin_number"], new_state)
             PINS[relay]["state"] = "HIGH" if new_state == GPIO.HIGH else "LOW"
+            print(f"{relay}\t{'on' if PINS[relay]['state'] == 'LOW' else 'off'}\n",)
             mutated_relays.append(relay)
         except KeyError:
             print(f"Relay not found: {relay}")
