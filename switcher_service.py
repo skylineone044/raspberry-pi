@@ -30,7 +30,7 @@ PINS = {
     "relay6": {"pin_number": 16, "direction": "OUT", "state": "HIGH"},
     "relay7": {"pin_number": 20, "direction": "OUT", "state": "HIGH"},
     "relay8": {"pin_number": 21, "direction": "OUT", "state": "LOW"},
-    "satus_led": {"pin_number": 7, "direction": "OUT", "state": "HIGH"},
+    "satus_led": {"pin_number": 7, "direction": "OUT", "state": "LOW"},
 }
 
 HOSTNAME = "192.168.31.120"
@@ -126,6 +126,7 @@ if __name__ == "__main__":
             continue
 
     print(f"Server started http://{HOSTNAME}:{PORT}")
+    GPIO.output(PINS["satus_led"]["pin_number"], GPIO.HIGH)
 
     try:
         webServer.serve_forever()
